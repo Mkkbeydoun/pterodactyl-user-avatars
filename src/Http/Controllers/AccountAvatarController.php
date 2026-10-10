@@ -1,12 +1,12 @@
 <?php
 
-namespace RustixAvatars\Http\Controllers;
+namespace UserAvatars\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use RustixAvatars\Services\AvatarService;
+use UserAvatars\Services\AvatarService;
 
 class AccountAvatarController extends Controller
 {

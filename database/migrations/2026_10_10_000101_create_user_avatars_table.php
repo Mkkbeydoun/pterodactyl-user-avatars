@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('ext_rustix_avatars', function (Blueprint $table) {
+        Schema::create('ext_user_avatars', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id')->unique();
             $table->string('token', 40)->unique();
@@ -21,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('ext_rustix_avatars');
+        Schema::dropIfExists('ext_user_avatars');
     }
 };

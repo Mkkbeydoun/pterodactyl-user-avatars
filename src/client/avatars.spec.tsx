@@ -9,7 +9,7 @@ import { myAvatarQuery, userAvatarQuery } from './api';
 let host: ReturnType<typeof createExtensionTestHost>;
 
 beforeEach(() => {
-    host = createExtensionTestHost({ extensionId: 'rustix-avatars', prefix: 'rxav' });
+    host = createExtensionTestHost({ extensionId: 'user-avatars', prefix: 'uavt' });
 });
 
 afterEach(() => {
@@ -19,8 +19,8 @@ afterEach(() => {
     document.documentElement.style.removeProperty(ROOT_VARIABLE);
 });
 
-const UPLOADED = { url: 'http://panel.test/extensions/rustix-avatars/a/abc', uploaded: true, max_kb: 2048 };
-const DEFAULT = { url: 'http://panel.test/extensions/rustix-avatars/d/u-1', uploaded: false, max_kb: 2048 };
+const UPLOADED = { url: 'http://panel.test/extensions/user-avatars/a/abc', uploaded: true, max_kb: 2048 };
+const DEFAULT = { url: 'http://panel.test/extensions/user-avatars/d/u-1', uploaded: false, max_kb: 2048 };
 
 test('the account card offers to change and remove an uploaded picture', async () => {
     host.queryClient.setQueryData(myAvatarQuery().queryKey, UPLOADED);

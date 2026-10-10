@@ -12,19 +12,19 @@ export interface UserAvatar {
     uploaded: boolean;
 }
 
-const CLIENT = '/api/client/extensions/rustix-avatars/me';
-const ADMIN = '/api/admin/extensions/rustix-avatars/users';
+const CLIENT = '/api/client/extensions/user-avatars/me';
+const ADMIN = '/api/admin/extensions/user-avatars/users';
 
 export const myAvatarQuery = () =>
     queryOptions({
-        queryKey: ['rustix-avatars', 'me'],
+        queryKey: ['user-avatars', 'me'],
         queryFn: async () => (await http.get<MyAvatar>(CLIENT)).data,
         staleTime: 5 * 60_000,
     });
 
 export const userAvatarQuery = (id: number) =>
     queryOptions({
-        queryKey: ['rustix-avatars', 'user', id],
+        queryKey: ['user-avatars', 'user', id],
         queryFn: async () => (await http.get<UserAvatar>(`${ADMIN}/${id}`)).data,
     });
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace RustixAvatars\Http\Controllers;
+namespace UserAvatars\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Pterodactyl\Models\User;
-use RustixAvatars\Models\Avatar;
+use UserAvatars\Models\Avatar;
 use Symfony\Component\HttpFoundation\Response;
 
 class ImageController extends Controller

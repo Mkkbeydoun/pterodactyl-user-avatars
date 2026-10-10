@@ -29,7 +29,7 @@ jobs:
           if [ "$GITHUB_REF_TYPE" = tag ]; then test "v$VERSION" = "$GITHUB_REF_NAME"; fi
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
       - name: Package
-        run: zip -r "rustix-avatars-$VERSION.pteroext" extension.json composer.json routes database dist src LICENSE README.md
+        run: zip -r "user-avatars-$VERSION.pteroext" extension.json composer.json routes database dist src LICENSE README.md
       - name: Release notes
         run: envsubst '${VERSION}' < .github/release-notes.md > release-notes.md
       - uses: softprops/action-gh-release@v2
@@ -38,4 +38,4 @@ jobs:
           target_commitish: ${{ github.sha }}
           name: User Avatars ${{ env.VERSION }}
           body_path: release-notes.md
-          files: rustix-avatars-${{ env.VERSION }}.pteroext
+          files: user-avatars-${{ env.VERSION }}.pteroext

@@ -1,17 +1,17 @@
 <?php
 
-namespace RustixAvatars;
+namespace UserAvatars;
 
 use Pterodactyl\Extensions\ExtensionProvider;
 use Pterodactyl\Services\Extensions\ExtensionSettingDefinition;
 use Pterodactyl\Services\Extensions\ExtensionSettingsDefinition;
 use Pterodactyl\Transformers\Api\Admin\UserTransformer as CoreAdminUserTransformer;
 use Pterodactyl\Transformers\Api\Client\UserTransformer as CoreClientUserTransformer;
-use RustixAvatars\Services\AvatarService;
-use RustixAvatars\Transformers\AdminUserTransformer;
-use RustixAvatars\Transformers\ClientUserTransformer;
+use UserAvatars\Services\AvatarService;
+use UserAvatars\Transformers\AdminUserTransformer;
+use UserAvatars\Transformers\ClientUserTransformer;
 
-class RustixAvatarsProvider extends ExtensionProvider
+class UserAvatarsProvider extends ExtensionProvider
 {
     public function boot(): void
     {

@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { myAvatarQuery } from '../api';
 
-export const ROOT_CLASS = 'rxav-has-avatar';
-export const ROOT_VARIABLE = '--rxav-avatar';
+export const ROOT_CLASS = 'uavt-has-avatar';
+export const ROOT_VARIABLE = '--uavt-avatar';
 
 /**
  * The navigation bar draws a generated avatar that extensions cannot replace,

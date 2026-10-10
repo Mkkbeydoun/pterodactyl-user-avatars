@@ -7,10 +7,10 @@ Profile picture uploads for Pterodactyl Panel v2.
 
 ## Install
 
-Download `rustix-avatars-${VERSION}.pteroext` below, then either upload it under **Admin → Extensions**, or run:
+Download `user-avatars-${VERSION}.pteroext` below, then either upload it under **Admin → Extensions**, or run:
 
 ```sh
-php artisan p:extension:install /path/to/rustix-avatars-${VERSION}.pteroext --enable
+php artisan p:extension:install /path/to/user-avatars-${VERSION}.pteroext --enable
 ```
 
 Requires Pterodactyl Panel 2.0 (2.0-develop or later) and PHP 8.3+.

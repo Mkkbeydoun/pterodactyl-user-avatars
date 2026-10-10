@@ -12,7 +12,7 @@ export default function AccountAvatarCard() {
     const [busy, setBusy] = useState<'upload' | 'remove' | null>(null);
     const { data } = useQuery(myAvatarQuery());
 
-    const refresh = () => queryClient.invalidateQueries({ queryKey: ['rustix-avatars'] });
+    const refresh = () => queryClient.invalidateQueries({ queryKey: ['user-avatars'] });
 
     const onFile = async (file: File | undefined) => {
         if (!file || !data) return;
@@ -48,29 +48,29 @@ export default function AccountAvatarCard() {
     };
 
     return (
-        <TitledGreyBox icon={CircleUser} title='Profile picture' className='rxav:mb-6'>
-            <div className='rxav:flex rxav:flex-wrap rxav:items-center rxav:gap-4'>
+        <TitledGreyBox icon={CircleUser} title='Profile picture' className='uavt:mb-6'>
+            <div className='uavt:flex uavt:flex-wrap uavt:items-center uavt:gap-4'>
                 {data ? (
                     <img
                         src={data.url}
                         alt='Your profile picture'
-                        className='rxav:h-16 rxav:overflow-hidden rxav:text-[0px] rxav:w-16 rxav:shrink-0 rxav:rounded-full rxav:border rxav:border-border rxav:bg-background rxav:object-cover'
+                        className='uavt:h-16 uavt:overflow-hidden uavt:text-[0px] uavt:w-16 uavt:shrink-0 uavt:rounded-full uavt:border uavt:border-border uavt:bg-background uavt:object-cover'
                     />
                 ) : (
-                    <div className='rxav:h-16 rxav:w-16 rxav:shrink-0 rxav:rounded-full rxav:bg-background' />
+                    <div className='uavt:h-16 uavt:w-16 uavt:shrink-0 uavt:rounded-full uavt:bg-background' />
                 )}
-                <div className='rxav:min-w-0 rxav:flex-1'>
-                    <p className='rxav:text-sm rxav:text-muted-foreground'>
+                <div className='uavt:min-w-0 uavt:flex-1'>
+                    <p className='uavt:text-sm uavt:text-muted-foreground'>
                         PNG, JPEG, WebP or GIF{data ? `, up to ${Math.round(data.max_kb / 1024) || 1} MB` : ''}. It is
                         cropped to a square.
                     </p>
-                    <div className='rxav:mt-3 rxav:flex rxav:flex-wrap rxav:gap-2'>
+                    <div className='uavt:mt-3 uavt:flex uavt:flex-wrap uavt:gap-2'>
                         <input
                             ref={input}
-                            id='rxav-file'
+                            id='uavt-file'
                             type='file'
                             accept={ACCEPT}
-                            className='rxav:hidden'
+                            className='uavt:hidden'
                             onChange={(event) => void onFile(event.currentTarget.files?.[0])}
                         />
                         <Button

@@ -1,18 +1,18 @@
-@import 'tailwindcss/theme.css' layer(theme) prefix(rxav);
-@import 'tailwindcss/utilities.css' layer(utilities) prefix(rxav);
+@import 'tailwindcss/theme.css' layer(theme) prefix(uavt);
+@import 'tailwindcss/utilities.css' layer(utilities) prefix(uavt);
 @import '@pterodactyl/sdk/theme.css';
 @source './**/*.{ts,tsx}';
 
 /*
  * The navigation bar's account link draws a generated avatar that extensions
- * cannot replace. NavAvatar sets --rxav-avatar on <html> to the user's
+ * cannot replace. NavAvatar sets --uavt-avatar on <html> to the user's
  * picture; show it in place of the generated one.
  */
-html.rxav-has-avatar a[aria-label='Account Settings'] > span {
-    background: var(--rxav-avatar) center / cover no-repeat;
+html.uavt-has-avatar a[aria-label='Account Settings'] > span {
+    background: var(--uavt-avatar) center / cover no-repeat;
     border-radius: 9999px;
 }
 
-html.rxav-has-avatar a[aria-label='Account Settings'] > span > svg {
+html.uavt-has-avatar a[aria-label='Account Settings'] > span > svg {
     visibility: hidden;
 }

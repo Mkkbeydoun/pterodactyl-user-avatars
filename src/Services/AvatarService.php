@@ -1,6 +1,6 @@
 <?php
 
-namespace RustixAvatars\Services;
+namespace UserAvatars\Services;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Cache;
@@ -9,13 +9,13 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Pterodactyl\Models\User;
 use Pterodactyl\Services\Extensions\ExtensionSettings;
-use RustixAvatars\Models\Avatar;
+use UserAvatars\Models\Avatar;
 
 class AvatarService
 {
     public const int SIZE = 256;
 
-    private const string CACHE_KEY = 'rustix-avatars:tokens';
+    private const string CACHE_KEY = 'user-avatars:tokens';
 
     /** @var array<int, string>|null user id => token, for every user with an upload */
     private ?array $tokens = null;
@@ -38,10 +38,10 @@ class AvatarService
         $token = $this->tokens()[$user->id] ?? null;
 
         if ($token !== null) {
-            return url('/extensions/rustix-avatars/a/'.$token);
+            return url('/extensions/user-avatars/a/'.$token);
         }
 
-        return url('/extensions/rustix-avatars/d/'.$user->uuid);
+        return url('/extensions/user-avatars/d/'.$user->uuid);
     }
 
     public function store(User $user, UploadedFile $file): Avatar

@@ -2,10 +2,10 @@
     "description": "Let users upload their own profile picture, shown in the navigation bar, admin user lists and server subuser lists.",
     "autoload": {
         "psr-4": {
-            "RustixAvatars\\": "src/"
+            "UserAvatars\\": "src/"
         }
     },
     "config": {
-        "autoloader-suffix": "RustixAvatarsExtension"
+        "autoloader-suffix": "UserAvatarsExtension"
     }
 }

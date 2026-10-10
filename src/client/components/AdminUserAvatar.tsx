@@ -28,11 +28,11 @@ export default function AdminUserAvatar({ data }: Props) {
     };
 
     return (
-        <div className='rxav:mb-4 rxav:flex rxav:items-center rxav:gap-3'>
+        <div className='uavt:mb-4 uavt:flex uavt:items-center uavt:gap-3'>
             <img
                 src={avatar.url}
                 alt=''
-                className='rxav:h-10 rxav:w-10 rxav:rounded-full rxav:border rxav:border-border rxav:object-cover'
+                className='uavt:h-10 uavt:w-10 uavt:rounded-full uavt:border uavt:border-border uavt:object-cover'
             />
             <Button.Danger size='small' onClick={() => setOpen(true)}>
                 Remove profile picture

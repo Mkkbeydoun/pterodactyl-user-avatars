@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use RustixAvatars\Http\Controllers\AccountAvatarController;
+use UserAvatars\Http\Controllers\AccountAvatarController;
 
 Route::get('/me', [AccountAvatarController::class, 'show']);
 Route::post('/me', [AccountAvatarController::class, 'store']);

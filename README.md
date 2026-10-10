@@ -23,9 +23,9 @@ Pterodactyl 2.0 has no avatar uploads. Core draws a generated pattern in the nav
 
 | Method | Path | Who |
 |---|---|---|
-| GET, POST, DELETE | `/api/client/extensions/rustix-avatars/me` | The signed-in user (POST takes a multipart `avatar` file) |
-| GET, DELETE | `/api/admin/extensions/rustix-avatars/users/{id}` | Root admins |
-| GET | `/extensions/rustix-avatars/a/{token}` | Signed-in users (the image itself) |
+| GET, POST, DELETE | `/api/client/extensions/user-avatars/me` | The signed-in user (POST takes a multipart `avatar` file) |
+| GET, DELETE | `/api/admin/extensions/user-avatars/users/{id}` | Root admins |
+| GET | `/extensions/user-avatars/a/{token}` | Signed-in users (the image itself) |
 
 ## Requirements
 
@@ -34,10 +34,10 @@ Pterodactyl 2.0 has no avatar uploads. Core draws a generated pattern in the nav
 
 ## Install
 
-From a release archive (`rustix-avatars-1.0.0.pteroext`):
+From a release archive (`user-avatars-1.0.0.pteroext`):
 
 ```sh
-php artisan p:extension:install /path/to/rustix-avatars-1.0.0.pteroext --enable
+php artisan p:extension:install /path/to/user-avatars-1.0.0.pteroext --enable
 ```
 
 Or upload the archive under **Admin → Extensions**. Reload the panel afterwards.
@@ -49,14 +49,22 @@ npm ci
 npm run typecheck
 npm test
 npm run build
-php artisan p:extension:doctor /path/to/rustix-avatars
-php artisan p:extension:pack /path/to/rustix-avatars
+php artisan p:extension:doctor /path/to/user-avatars
+php artisan p:extension:pack /path/to/user-avatars
+```
+
+## Upgrading from rustix-avatars
+
+Up to 2.0.0 this extension was called `rustix-avatars`. Install `user-avatars`, which copies everyone's pictures across, then remove the old one:
+
+```sh
+php artisan p:extension:remove rustix-avatars
 ```
 
 ## Uninstall
 
 ```sh
-php artisan p:extension:remove rustix-avatars
+php artisan p:extension:remove user-avatars
 ```
 
 ## License

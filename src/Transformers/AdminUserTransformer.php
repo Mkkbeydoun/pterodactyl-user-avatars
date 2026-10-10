@@ -1,10 +1,10 @@
 <?php
 
-namespace RustixAvatars\Transformers;
+namespace UserAvatars\Transformers;
 
 use Pterodactyl\Models\User;
 use Pterodactyl\Transformers\Api\Admin\UserTransformer;
-use RustixAvatars\Services\AvatarService;
+use UserAvatars\Services\AvatarService;
 
 class AdminUserTransformer extends UserTransformer
 {
