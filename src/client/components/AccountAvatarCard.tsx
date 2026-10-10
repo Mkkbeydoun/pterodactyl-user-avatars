@@ -54,9 +54,6 @@ export default function AccountAvatarCard() {
                     <img
                         src={data.url}
                         alt='Your profile picture'
-                        onError={(event) => {
-                            if (event.currentTarget.src !== data.fallback) event.currentTarget.src = data.fallback;
-                        }}
                         className='rxav:h-16 rxav:overflow-hidden rxav:text-[0px] rxav:w-16 rxav:shrink-0 rxav:rounded-full rxav:border rxav:border-border rxav:bg-background rxav:object-cover'
                     />
                 ) : (

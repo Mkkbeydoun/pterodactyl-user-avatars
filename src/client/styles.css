@@ -5,8 +5,8 @@
 
 /*
  * The navigation bar's account link draws a generated avatar that extensions
- * cannot replace. When the user has uploaded a picture, NavAvatar sets
- * --rxav-avatar on <html>; show it in place of the generated one.
+ * cannot replace. NavAvatar sets --rxav-avatar on <html> to the user's
+ * picture; show it in place of the generated one.
  */
 html.rxav-has-avatar a[aria-label='Account Settings'] > span {
     background: var(--rxav-avatar) center / cover no-repeat;

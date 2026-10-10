@@ -25,10 +25,6 @@ class RustixAvatarsProvider extends ExtensionProvider
                 ->field('number')
                 ->label('Largest upload (KB)')
                 ->help('Uploads are cropped to a square and resized to 256 pixels, so the stored file is much smaller than this.'),
-            ExtensionSettingDefinition::make('gravatar_fallback', 'gravatar_fallback', true, ['boolean'])
-                ->field('toggle')
-                ->label('Use Gravatar for users without an upload')
-                ->help('Turn off to stop sending email hashes to Gravatar. Users without an upload then get their initial on a coloured circle.'),
         ]));
 
         $this->app->scoped(AvatarService::class, fn () => new AvatarService($this->settings()));

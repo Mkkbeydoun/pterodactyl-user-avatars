@@ -8,15 +8,15 @@ Let users upload their own profile picture, shown in the navigation bar, admin u
 - **Safe storage**: every upload is cropped to a square, resized to 256 pixels and re-encoded (WebP when the server supports it), which strips metadata and anything hidden in the file. Pictures are stored outside the web root and only served to signed-in users.
 - **Shown across the panel**: the navigation bar, the admin user list, the admin user page, a server's owner in admin, and the server Users list.
 - **Admin moderation**: admins can remove a user's picture from the user's admin page.
-- **No Gravatar if you don't want it**: turn off the Gravatar fallback in the extension settings and users without an upload get their initial on a coloured circle instead. No email hashes are sent to a third party.
-- **Settings** under **Admin → Extensions → User Avatars**: largest upload size and the Gravatar fallback.
+- **A default picture for everyone else**: users without an upload get their initial on a coloured circle. Nothing is loaded from Gravatar or any other outside service.
+- **Settings** under **Admin → Extensions → User Avatars**: the largest upload size.
 
 ## How it works
 
-Pterodactyl 2.0 has no avatar uploads. Core draws a generated pattern in the navigation bar and a Gravatar image in admin and subuser lists.
+Pterodactyl 2.0 has no avatar uploads. Core draws a generated pattern in the navigation bar and loads Gravatar images in admin and subuser lists. This extension replaces both with the user's upload or the default picture.
 
-- Lists that show a user's `image` (admin users, server owner, subusers) get the uploaded picture because this extension replaces the panel's user transformers with versions that swap in the uploaded URL. If another extension also replaces `Pterodactyl\Transformers\Api\Client\UserTransformer` or `Pterodactyl\Transformers\Api\Admin\UserTransformer`, only one of them will win.
-- The navigation bar avatar is not a replaceable component in 2.0, so the uploaded picture is laid over it with CSS that targets the "Account Settings" link. A panel update that changes that link could break it; the rest of the extension is unaffected.
+- Lists that show a user's `image` (admin users, server owner, subusers) get the user's picture because this extension replaces the panel's user transformers with versions that swap in the uploaded URL. If another extension also replaces `Pterodactyl\Transformers\Api\Client\UserTransformer` or `Pterodactyl\Transformers\Api\Admin\UserTransformer`, only one of them will win.
+- The navigation bar avatar is not a replaceable component in 2.0, so the user's picture is laid over it with CSS that targets the "Account Settings" link. A panel update that changes that link could break it; the rest of the extension is unaffected.
 - The activity log keeps the panel's generated avatars.
 
 ## API

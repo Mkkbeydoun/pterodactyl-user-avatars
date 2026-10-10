@@ -27,11 +27,6 @@ class AvatarService
         return (int) $this->settings->get('max_kb', 2048);
     }
 
-    public function gravatarFallback(): bool
-    {
-        return (bool) $this->settings->get('gravatar_fallback', true);
-    }
-
     public function hasUpload(User $user): bool
     {
         return isset($this->tokens()[$user->id]);
@@ -46,16 +41,6 @@ class AvatarService
             return url('/extensions/rustix-avatars/a/'.$token);
         }
 
-        if ($this->gravatarFallback()) {
-            return 'https://gravatar.com/avatar/'.md5(Str::lower($user->email));
-        }
-
-        return $this->initialUrl($user);
-    }
-
-    /** The generated initial picture, also used when an image fails to load (Gravatar blocked, for example). */
-    public function initialUrl(User $user): string
-    {
         return url('/extensions/rustix-avatars/d/'.$user->uuid);
     }
 

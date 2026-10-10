@@ -29,8 +29,8 @@ class ImageController extends Controller
         ]);
     }
 
-    /** The picture for users without an upload when Gravatar is turned off: their initial on a colour from their UUID. */
-    public function fallback(string $uuid): Response
+    /** The default picture for users without an upload: their initial on a colour from their UUID. */
+    public function initial(string $uuid): Response
     {
         $user = User::query()->where('uuid', $uuid)->firstOrFail();
         $name = trim((string) ($user->name_first ?: $user->username));

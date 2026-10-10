@@ -4,7 +4,6 @@ import { http } from '@pterodactyl/sdk';
 export interface MyAvatar {
     url: string;
     uploaded: boolean;
-    fallback: string;
     max_kb: number;
 }
 

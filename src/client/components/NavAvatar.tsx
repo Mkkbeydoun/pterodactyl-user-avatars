@@ -7,12 +7,12 @@ export const ROOT_VARIABLE = '--rxav-avatar';
 
 /**
  * The navigation bar draws a generated avatar that extensions cannot replace,
- * so this puts the uploaded picture behind it with CSS (see styles.css).
- * Renders nothing itself.
+ * so this puts the user's picture (their upload, or the default initial) behind
+ * it with CSS (see styles.css). Renders nothing itself.
  */
 export default function NavAvatar() {
     const { data } = useQuery(myAvatarQuery());
-    const url = data?.uploaded ? data.url : null;
+    const url = data?.url ?? null;
 
     useEffect(() => {
         const root = document.documentElement;

@@ -3,7 +3,7 @@ Profile picture uploads for Pterodactyl Panel v2.
 - Users upload a picture from their Account page. It is cropped to a square, resized to 256 pixels and re-encoded.
 - It shows in the navigation bar, the admin user list and user page, and server subuser lists.
 - Admins can remove any user's picture.
-- Gravatar can be turned off in the extension settings. Users without an upload then get their initial on a coloured circle.
+- Users without an upload get a default picture: their initial on a coloured circle. Nothing is loaded from Gravatar.
 
 ## Install
 

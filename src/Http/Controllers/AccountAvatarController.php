@@ -43,7 +43,6 @@ class AccountAvatarController extends Controller
         return [
             'url' => $this->avatars->url($user),
             'uploaded' => $this->avatars->hasUpload($user),
-            'fallback' => $this->avatars->initialUrl($user),
             'max_kb' => $this->avatars->maxKilobytes(),
         ];
     }
