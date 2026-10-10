@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Check the tag matches extension.json
+        run: |
+          VERSION=$(node -p "require('./extension.json').version")
+          test "v$VERSION" = "$GITHUB_REF_NAME"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+      - name: Package
+        run: zip -r "rustix-avatars-$VERSION.pteroext" extension.json composer.json routes database dist src LICENSE README.md
+      - name: Release notes
+        run: envsubst '${VERSION}' < .github/release-notes.md > release-notes.md
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: User Avatars ${{ env.VERSION }}
+          body_path: release-notes.md
+          files: rustix-avatars-${{ env.VERSION }}.pteroext
