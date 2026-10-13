@@ -2,7 +2,7 @@ import { afterEach, beforeEach, expect, test } from 'vitest';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { createExtensionTestHost } from '@pterodactyl/sdk/testing';
 import AccountAvatarCard from './components/AccountAvatarCard';
-import ActivityAvatars, { ACTIVITY_CLASS } from './components/ActivityAvatars';
+import ActivityAvatars, { ACTIVITY_CLASS, SYSTEM_CLASS, decorateActivityRows, setSystemPicture } from './components/ActivityAvatars';
 import AdminUserAvatar from './components/AdminUserAvatar';
 import NavAvatar, { ROOT_CLASS, ROOT_VARIABLE } from './components/NavAvatar';
 import { myAvatarQuery, userAvatarQuery } from './api';
@@ -100,6 +100,30 @@ test('activity rows show the actor picture in place of the generated avatar', as
     await waitFor(() => expect(admin.classList.contains(ACTIVITY_CLASS)).toBe(true));
     expect(admin.style.backgroundImage).toContain(UPLOADED.url);
     expect(system.classList.contains(ACTIVITY_CLASS)).toBe(false);
+    expect(system.classList.contains(SYSTEM_CLASS)).toBe(true);
+    expect(admin.classList.contains(SYSTEM_CLASS)).toBe(false);
 
     list.remove();
+});
+
+test('system rows use the admin system picture when one is set', () => {
+    const list = document.createElement('div');
+    list.innerHTML = `
+        <div class="grid grid-cols-10">
+            <div><div class="w-10 h-10 rounded-full overflow-hidden"><svg role="img"></svg></div></div>
+            <div><div class="flex items-center text-foreground"><span>System</span></div></div>
+        </div>`;
+    const circle = list.querySelector<HTMLElement>('div.rounded-full')!;
+
+    setSystemPicture('/extensions/user-avatars/files/system.png');
+    decorateActivityRows(list, new Map());
+    expect(circle.classList.contains(ACTIVITY_CLASS)).toBe(true);
+    expect(circle.classList.contains(SYSTEM_CLASS)).toBe(false);
+    expect(circle.style.backgroundImage).toContain('system.png');
+
+    setSystemPicture(null);
+    decorateActivityRows(list, new Map());
+    expect(circle.classList.contains(ACTIVITY_CLASS)).toBe(false);
+    expect(circle.classList.contains(SYSTEM_CLASS)).toBe(true);
+    expect(circle.style.backgroundImage).toBe('');
 });
