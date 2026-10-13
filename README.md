@@ -1,12 +1,12 @@
 # User Avatars for Pterodactyl
 
-Let users upload their own profile picture, shown in the navigation bar, admin user lists and server subuser lists.
+Let users upload their own profile picture, shown in the navigation bar, admin user lists, server subuser lists and activity logs.
 
 ## Features
 
 - **Upload a profile picture** from the Account page. PNG, JPEG, WebP and GIF are accepted.
 - **Safe storage**: every upload is cropped to a square, resized to 256 pixels and re-encoded (WebP when the server supports it), which strips metadata and anything hidden in the file. Pictures are stored outside the web root and only served to signed-in users.
-- **Shown across the panel**: the navigation bar, the admin user list, the admin user page, a server's owner in admin, and the server Users list.
+- **Shown across the panel**: the navigation bar, the admin user list, the admin user page, a server's owner in admin, the server Users list, and activity logs (a server's Activity tab, account activity and admin activity).
 - **Admin moderation**: admins can remove a user's picture from the user's admin page.
 - **A default picture for everyone else**: users without an upload get their initial on a coloured circle. Nothing is loaded from Gravatar or any other outside service.
 - **Settings** under **Admin → Extensions → User Avatars**: the largest upload size.
@@ -17,7 +17,7 @@ Pterodactyl 2.0 has no avatar uploads. Core draws a generated pattern in the nav
 
 - Lists that show a user's `image` (admin users, server owner, subusers) get the user's picture because this extension replaces the panel's user transformers with versions that swap in the uploaded URL. If another extension also replaces `Pterodactyl\Transformers\Api\Client\UserTransformer` or `Pterodactyl\Transformers\Api\Admin\UserTransformer`, only one of them will win.
 - The navigation bar avatar is not a replaceable component in 2.0, so the user's picture is laid over it with CSS that targets the "Account Settings" link. A panel update that changes that link could break it; the rest of the extension is unaffected.
-- The activity log keeps the panel's generated avatars.
+- Activity rows draw a generated avatar from the username and are not replaceable either. The activity API already includes each actor's picture, so the extension matches rows to it by username and lays the picture over the generated avatar. A panel update that changes the activity row layout could break it.
 
 ## API
 

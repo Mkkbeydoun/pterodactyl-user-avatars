@@ -2,6 +2,7 @@ import { afterEach, beforeEach, expect, test } from 'vitest';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { createExtensionTestHost } from '@pterodactyl/sdk/testing';
 import AccountAvatarCard from './components/AccountAvatarCard';
+import ActivityAvatars, { ACTIVITY_CLASS } from './components/ActivityAvatars';
 import AdminUserAvatar from './components/AdminUserAvatar';
 import NavAvatar, { ROOT_CLASS, ROOT_VARIABLE } from './components/NavAvatar';
 import { myAvatarQuery, userAvatarQuery } from './api';
@@ -66,4 +67,39 @@ test('admins see a remove button only for users with an upload', async () => {
 
     render(<AdminUserAvatar data={user(6)} />, { wrapper: host.Wrapper });
     await waitFor(() => expect(screen.queryByText('Remove profile picture')).toBeNull());
+});
+
+test('activity rows show the actor picture in place of the generated avatar', async () => {
+    host.queryClient.setQueryData(['activity-test'], {
+        object: 'list',
+        data: [
+            {
+                object: 'activity_log',
+                attributes: {
+                    event: 'server:settings.rename',
+                    relationships: {
+                        actor: { object: 'user', attributes: { username: 'admin', image: UPLOADED.url } },
+                    },
+                },
+            },
+        ],
+    });
+
+    const row = (username: string) => `
+        <div class="grid grid-cols-10">
+            <div><div class="w-10 h-10 rounded-full overflow-hidden"><svg role="img"></svg></div></div>
+            <div><div class="flex items-center text-foreground"><span>${username}</span><span>&nbsp;-&nbsp;</span></div></div>
+        </div>`;
+    const list = document.createElement('div');
+    list.innerHTML = row('admin') + row('System');
+    document.body.appendChild(list);
+
+    render(<ActivityAvatars />, { wrapper: host.Wrapper });
+
+    const [admin, system] = list.querySelectorAll<HTMLElement>('div.rounded-full');
+    await waitFor(() => expect(admin.classList.contains(ACTIVITY_CLASS)).toBe(true));
+    expect(admin.style.backgroundImage).toContain(UPLOADED.url);
+    expect(system.classList.contains(ACTIVITY_CLASS)).toBe(false);
+
+    list.remove();
 });

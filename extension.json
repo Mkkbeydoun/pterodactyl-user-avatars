@@ -2,8 +2,8 @@
     "$schema": "./node_modules/@pterodactyl/sdk/manifest.schema.json",
     "id": "user-avatars",
     "name": "User Avatars",
-    "version": "3.0.0",
-    "description": "Let users upload their own profile picture, shown in the navigation bar, admin user lists and server subuser lists.",
+    "version": "3.0.1",
+    "description": "Let users upload their own profile picture, shown in the navigation bar, admin user lists, server subuser lists and activity logs.",
     "author": "RustixDev",
     "icon": "circle-user",
     "requires": {

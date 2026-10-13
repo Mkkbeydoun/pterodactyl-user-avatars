@@ -16,3 +16,12 @@ html.uavt-has-avatar a[aria-label='Account Settings'] > span {
 html.uavt-has-avatar a[aria-label='Account Settings'] > span > svg {
     visibility: hidden;
 }
+
+/* Activity rows: ActivityAvatars sets the actor's picture behind the generated avatar. */
+.uavt-activity-avatar {
+    background: center / cover no-repeat;
+}
+
+.uavt-activity-avatar > svg {
+    visibility: hidden;
+}
