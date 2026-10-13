@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.0
+
+- Activity rows with no user behind them (failed logins, scheduled tasks) show a plain system icon instead of a generated pattern.
+- New **System picture** setting: admins can upload a picture for those rows instead (Admin, Extensions, User Avatars).
+
 ## 3.0.1
 
 - Pictures now show in activity logs (a server's Activity tab, your account activity and the admin activity page). These lists drew a generated avatar and ignored the user's picture.

@@ -2,6 +2,17 @@ import { useEffect } from 'react';
 import { useQueryClient, type QueryClient } from '@tanstack/react-query';
 
 export const ACTIVITY_CLASS = 'uavt-activity-avatar';
+export const SYSTEM_CLASS = 'uavt-activity-system';
+
+/** The label core gives rows with no user behind them (failed logins, scheduled tasks). */
+const SYSTEM_LABEL = 'System';
+
+/** The admin's "System picture" setting, if one was uploaded. */
+let systemPicture: string | undefined;
+
+export function setSystemPicture(value: unknown): void {
+    systemPicture = typeof value === 'string' && value.trim() !== '' ? value.trim() : undefined;
+}
 
 interface ActorAttributes {
     username?: string;
@@ -33,13 +44,19 @@ export function actorImages(client: QueryClient): Map<string, string> {
     return images;
 }
 
-/** Put each activity row's picture behind its generated avatar (hidden by styles.css). */
+/**
+ * Put each activity row's picture behind its generated avatar (hidden by styles.css).
+ * Rows with no user get the admin's system picture, or a plain system icon
+ * when none is set, instead of a generated pattern.
+ */
 export function decorateActivityRows(root: ParentNode, images: Map<string, string>): void {
     for (const svg of root.querySelectorAll<SVGElement>('div.rounded-full > svg[role="img"]')) {
         const circle = svg.parentElement as HTMLElement;
         const row = circle.closest('.grid');
         const username = row?.querySelector('.text-foreground > span:first-child')?.textContent?.trim();
-        const image = username ? images.get(username) : undefined;
+        const image = (username ? images.get(username) : undefined) ?? (username === SYSTEM_LABEL ? systemPicture : undefined);
+
+        circle.classList.toggle(SYSTEM_CLASS, !image && username === SYSTEM_LABEL);
 
         if (!image) {
             if (circle.classList.contains(ACTIVITY_CLASS)) {

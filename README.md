@@ -17,7 +17,7 @@ Pterodactyl 2.0 has no avatar uploads. Core draws a generated pattern in the nav
 
 - Lists that show a user's `image` (admin users, server owner, subusers) get the user's picture because this extension replaces the panel's user transformers with versions that swap in the uploaded URL. If another extension also replaces `Pterodactyl\Transformers\Api\Client\UserTransformer` or `Pterodactyl\Transformers\Api\Admin\UserTransformer`, only one of them will win.
 - The navigation bar avatar is not a replaceable component in 2.0, so the user's picture is laid over it with CSS that targets the "Account Settings" link. A panel update that changes that link could break it; the rest of the extension is unaffected.
-- Activity rows draw a generated avatar from the username and are not replaceable either. The activity API already includes each actor's picture, so the extension matches rows to it by username and lays the picture over the generated avatar. A panel update that changes the activity row layout could break it.
+- Activity rows draw a generated avatar from the username and are not replaceable either. The activity API already includes each actor's picture, so the extension matches rows to it by username and lays the picture over the generated avatar. Rows with no user (shown as "System") get the picture set in the extension's **System picture** setting, or a plain system icon when none is set. A panel update that changes the activity row layout could break it.
 
 ## API
 
