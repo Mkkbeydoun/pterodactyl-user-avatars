@@ -15,7 +15,7 @@ Let users upload their own profile picture, shown in the navigation bar, admin u
 
 Pterodactyl 2.0 has no avatar uploads. Core draws a generated pattern in the navigation bar and loads Gravatar images in admin and subuser lists. This extension replaces both with the user's upload or the default picture.
 
-- Lists that show a user's `image` (admin users, server owner, subusers) get the user's picture because this extension replaces the panel's user transformers with versions that swap in the uploaded URL. If another extension also replaces `Pterodactyl\Transformers\Api\Client\UserTransformer` or `Pterodactyl\Transformers\Api\Admin\UserTransformer`, only one of them will win.
+- Lists that show a user's `image` (admin users, server owner, subusers, activity) get the user's picture because the extension swaps the uploaded or default picture into the panel's API responses as they go out. The panel's own user resources cannot be replaced in v2.0.0-beta.1, so this is done after the response is built.
 - The navigation bar avatar is not a replaceable component in 2.0, so the user's picture is laid over it with CSS that targets the "Account Settings" link. A panel update that changes that link could break it; the rest of the extension is unaffected.
 - Activity rows draw a generated avatar from the username and are not replaceable either. The activity API already includes each actor's picture, so the extension matches rows to it by username and lays the picture over the generated avatar. Rows with no user (shown as "System") get the picture set in the extension's **System picture** setting, or a plain system icon when none is set. A panel update that changes the activity row layout could break it.
 
@@ -29,7 +29,7 @@ Pterodactyl 2.0 has no avatar uploads. Core draws a generated pattern in the nav
 
 ## Requirements
 
-- Pterodactyl Panel 2.0 (2.0-develop or later)
+- Pterodactyl Panel v2.0.0-beta.1 or later
 - PHP 8.3+ (the GD extension is recommended; without it only PNG, JPEG and WebP are accepted and stored as uploaded)
 
 ## Install
