@@ -35,13 +35,18 @@ class AvatarService
     /** The URL core components put in <img src>. They append "?s=<size>", so it must take a query string. */
     public function url(User $user): string
     {
-        $token = $this->tokens()[$user->id] ?? null;
+        return $this->urlFor($user->id, $user->uuid);
+    }
+
+    public function urlFor(int $id, string $uuid): string
+    {
+        $token = $this->tokens()[$id] ?? null;
 
         if ($token !== null) {
             return url('/extensions/user-avatars/a/'.$token);
         }
 
-        return url('/extensions/user-avatars/d/'.$user->uuid);
+        return url('/extensions/user-avatars/d/'.$uuid);
     }
 
     public function store(User $user, UploadedFile $file): Avatar

@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.2.0
+
+- Works with Pterodactyl v2.0.0-beta.1 (SDK beta.6).
+- The beta removed the user transformers this extension replaced, so pictures had fallen back to Gravatar in admin lists, subusers and activity. Pictures are now put into the panel's API responses directly.
+
 ## 3.1.0
 
 - Activity rows with no user behind them (failed logins, scheduled tasks) show a plain system icon instead of a generated pattern.

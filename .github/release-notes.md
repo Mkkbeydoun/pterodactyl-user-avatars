@@ -13,6 +13,6 @@ Download `user-avatars-${VERSION}.pteroext` below, then either upload it under *
 php artisan p:extension:install /path/to/user-avatars-${VERSION}.pteroext --enable
 ```
 
-Requires Pterodactyl Panel 2.0 (2.0-develop or later) and PHP 8.3+.
+Requires Pterodactyl Panel v2.0.0-beta.1 or later and PHP 8.3+.
 
 This is a community extension and is not affiliated with or endorsed by Pterodactyl.

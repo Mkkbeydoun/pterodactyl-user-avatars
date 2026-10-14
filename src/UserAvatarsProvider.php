@@ -6,11 +6,10 @@ use Pterodactyl\Extensions\ExtensionProvider;
 use Pterodactyl\Services\Extensions\ExtensionSettingDefinition;
 use Pterodactyl\Services\Extensions\ExtensionSettingFiles;
 use Pterodactyl\Services\Extensions\ExtensionSettingsDefinition;
-use Pterodactyl\Transformers\Api\Admin\UserTransformer as CoreAdminUserTransformer;
-use Pterodactyl\Transformers\Api\Client\UserTransformer as CoreClientUserTransformer;
+use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Support\Facades\Event;
+use UserAvatars\Http\UserImages;
 use UserAvatars\Services\AvatarService;
-use UserAvatars\Transformers\AdminUserTransformer;
-use UserAvatars\Transformers\ClientUserTransformer;
 
 class UserAvatarsProvider extends ExtensionProvider
 {
@@ -35,10 +34,8 @@ class UserAvatarsProvider extends ExtensionProvider
 
         $this->app->scoped(AvatarService::class, fn () => new AvatarService($this->settings()));
 
-        // Core user transformers are resolved through the container, so every API
-        // response that includes a user's "image" (admin user list, server owner,
-        // subusers) picks up the uploaded avatar.
-        $this->app->bind(CoreClientUserTransformer::class, ClientUserTransformer::class);
-        $this->app->bind(CoreAdminUserTransformer::class, AdminUserTransformer::class);
+        // Every API response that includes a user's "image" (admin user list, server
+        // owner, subusers, activity) gets the uploaded or default picture.
+        Event::listen(RequestHandled::class, [UserImages::class, 'handle']);
     }
 }
